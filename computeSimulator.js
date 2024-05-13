@@ -5,17 +5,29 @@ import MAP, { distributeItems } from "./Map.js";
 
 let COUNT, DEVICE, BOID_DATA, BUFFER_SIZE, boidShapeBuffer, output, input, commandEncoder, computePipeline, renderPipeline,renderPipeline1, computebindGroup, bodyBindGroup, shadowBindGroup, context, cursorBuffer, sunBuffer, colorBuffer;    
 
-// const clearColor = { r: 73 / 255, g: 72 / 255, b: 80 / 255, a: 1.0 };
 const clearColor = { r: 1., g: 1., b: 1., a: 1.0 };
 const sunPostion = new Float32Array([0 , 0]);
-const boidColors = new Float32Array([[ 54, 39, 41, 1], [0, 31, 84, 1], [3, 64, 120, 1], [18, 130, 162, 1], [238, 108, 77, 1]].flat());
-// const boidShape = new Float32Array();
-const boidShape = new Float32Array(generateCircleMesh(0.5).flat());
+const boidColors = new Float32Array([[ 54, 39, 41, 1], [0, 31, 84, 1], [3, 64, 120, 1], [18, 130, 162, 1], [238, 108, 77, 1]].flat().map(e => e / 255));
+const boidShape = new Float32Array(generateArrowMesh(0.5).flat());
 
 
-function generateArrowMesh() {
+function generatePointerMesh() {
   return [[0, 1], [0.5, -0.5], [0, -0.2], [0, -0.2], [-0.5, -0.5], [0, 1]];
 }
+
+function generateArrowMesh() {
+  return [ [-0.1, 0], [0.1, 0], [0.1, 1], 
+    [-0.1, 0], [0.1, 1], [-0.1, 1], 
+    [-0.1, 1], [0.1, 1], [0, 1.1], 
+    [-0.4, 0.6], [-0.3, 0.6], [-0.4, 0.7], 
+    [-0.3, 0.6], [-0.1, 0.8], [-0.1, 1], 
+    [-0.3, 0.6], [-0.1, 1], [-0.4, 0.7], 
+    [0.3, 0.6], [0.4, 0.6], [0.4, 0.7], 
+    [0.3, 0.6], [0.1, 1], [0.1, 0.8], 
+    [0.3, 0.6], [0.4, 0.7], [0.1, 1]].map(e => [e[0], e[1] - 0.55]);
+}
+
+
 
 function generateCircleMesh(radius = 1, numTriangles = 20) {
   const vertices = [];

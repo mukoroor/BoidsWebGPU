@@ -7,7 +7,7 @@ const bodyShader = /*wgsl*/`
     @group(0) @binding(0)
     var<storage, read> colors: array<vec4<f32>>;
 
-    override size: f32 = 0.04;
+    override size: f32 = 0.05;
     override ratio: f32 = 1.;
 
     @vertex
@@ -29,7 +29,7 @@ const bodyShader = /*wgsl*/`
         var colorsLen = arrayLength(&colors);
         var output : VertexOutput;
         output.position = vec4((a_particlePos.x + pos.x) / ratio, a_particlePos.y + pos.y,  .0, 1.0);
-        output.color = vec4(red + colors[index % colorsLen].x / 255, colors[index % colorsLen].y / 255, colors[index % colorsLen].z / 255, 1.);
+        output.color = vec4(red + colors[index % colorsLen].x, colors[index % colorsLen].y, colors[index % colorsLen].z, 1.);
         return output;
     }
     

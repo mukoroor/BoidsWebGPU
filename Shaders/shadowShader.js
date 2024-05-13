@@ -3,7 +3,7 @@ const shadowShader = /*wgsl*/`
         pos: vec2<f32>,
     }
 
-    override size: f32 = 0.04;
+    override size: f32 = 0.05;
     override ratio: f32 = 1.;
 
     @group(0) @binding(0)
